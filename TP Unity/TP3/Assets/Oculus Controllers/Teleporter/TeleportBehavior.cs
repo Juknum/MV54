@@ -5,100 +5,72 @@ using UnityEngine.InputSystem;
 
 public class TeleportBehavior : MonoBehaviour
 {
-    public float maxDistance = 5f;
+    public GameObject player;
     public Material nokMaterial;
-    private Material okMaterial;
+    public Material okMaterial;
+
     public string floorTag = "Floor";
+    public float maxDistance = 5f;
+
     private bool canTeleport = false;
     private bool pointerVisible = false;
+
     private LineRenderer lineRenderer;
     private Vector3 destinationPoint;
-    public GameObject player;
 
-    // Start is called before the first frame update
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        okMaterial = lineRenderer.material;
-        HidePointer();
+        lineRenderer.enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (pointerVisible)
-        {
-            lineRenderer.SetPosition(0, transform.position);
-            RaycastHit hit;
+        if (!pointerVisible) return;
+
+        lineRenderer.SetPosition(0, transform.position);
+        RaycastHit hit;
 
             
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance))
+        {
+            if (hit.collider.gameObject.CompareTag(floorTag))
             {
-                if (hit.collider.gameObject.CompareTag(floorTag))
-                {
-                    canTeleport = true;
-                    destinationPoint = hit.point;
-                    lineRenderer.material = okMaterial;
-                }
-                else
-                {
-                    canTeleport = false;
-                    lineRenderer.material = nokMaterial;
-                }
-                lineRenderer.SetPosition(1, transform.position + transform.forward * hit.distance);
+                canTeleport = true;
+                destinationPoint = hit.point;
+                lineRenderer.material = okMaterial;
             }
             else
             {
-                lineRenderer.SetPosition(1, transform.position + transform.forward * maxDistance);
+                canTeleport = false;
+                lineRenderer.material = nokMaterial;
             }
+
+            lineRenderer.SetPosition(1, transform.position + transform.forward * hit.distance);
         }
+
+        else lineRenderer.SetPosition(1, transform.position + transform.forward * maxDistance);
     }
 
-    void HidePointer()
+    private void UpdatePointerVisibility()
     {
-        if (lineRenderer)
-        {
-            lineRenderer.enabled = false;
-        }
-        pointerVisible = false;
+        if (lineRenderer) lineRenderer.enabled = !lineRenderer.enabled;
+        pointerVisible = !pointerVisible;
     }
 
-    void ShowPointer()
+    private void Teleport()
     {
-        if (lineRenderer)
-        {
-            lineRenderer.enabled = true;
-        }
-        pointerVisible = true;
-    }
-
-    void Teleport()
-    {
-        if (player)
-        {
-            player.transform.position = destinationPoint;
-        }
+        if (!player) return;
+        player.transform.position = destinationPoint;
     }
 
     public void OnTeleportAction(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            ShowPointer();
-        }
+        if (context.started) UpdatePointerVisibility();
         if (context.canceled)
         {
-            if(canTeleport)
-            {
-                Teleport();
-            }
-            HidePointer();
+            if(canTeleport) Teleport();
+            UpdatePointerVisibility();
         }
     }
-
-    private void FixeUpdate()
-    {
-        
-    }
-
 }
