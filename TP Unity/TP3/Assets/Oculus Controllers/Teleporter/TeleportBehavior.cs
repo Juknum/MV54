@@ -24,15 +24,13 @@ public class TeleportBehavior : MonoBehaviour
         lineRenderer.enabled = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (!pointerVisible) return;
 
         lineRenderer.SetPosition(0, transform.position);
-        RaycastHit hit;
 
-            
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, maxDistance))
         {
             if (hit.collider.gameObject.CompareTag(floorTag))
             {
@@ -69,7 +67,7 @@ public class TeleportBehavior : MonoBehaviour
         if (context.started) UpdatePointerVisibility();
         if (context.canceled)
         {
-            if(canTeleport) Teleport();
+            if (canTeleport) Teleport();
             UpdatePointerVisibility();
         }
     }

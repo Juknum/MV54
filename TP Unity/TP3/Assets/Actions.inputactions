@@ -130,6 +130,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Trigger Right Pressed",
+                    "type": "Button",
+                    "id": "6f69edf4-1052-4f4d-b1a3-dad247d3b291",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Trigger Left Pressed",
+                    "type": "Button",
+                    "id": "7d886d12-17ac-459b-9174-205878af04e0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -284,6 +302,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Thumbstick Axis Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34548d76-5a6f-4902-b20f-56bd21ee0a23",
+                    "path": "<OculusTouchController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Trigger Right Pressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a85cc1ea-a9be-4998-a4f4-2bae0ad10288",
+                    "path": "<OculusTouchController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Trigger Left Pressed",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
