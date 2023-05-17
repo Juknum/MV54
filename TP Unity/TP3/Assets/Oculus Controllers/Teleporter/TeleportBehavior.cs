@@ -22,6 +22,7 @@ public class TeleportBehavior : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
+        lineRenderer.material = nokMaterial;
     }
 
     void FixedUpdate()

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5454462414427323545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2792233729773057}
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c42ff44e9dcd4947ab37884bb95fedd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabType: 1
 --- !u!54 &7054866491109227753
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -130,7 +131,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 08b2e7073595c2e4ca0dafe35a7456fe, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8e7d275ebe0f8504d8c31433580f6ec0, type: 2}
+      objectReference: {fileID: 2100000, guid: f42d1cebff67a214eb14dccb00628c27, type: 2}
     - target: {fileID: 919132149155446097, guid: 08b2e7073595c2e4ca0dafe35a7456fe, type: 3}
       propertyPath: m_Name
       value: Cube
